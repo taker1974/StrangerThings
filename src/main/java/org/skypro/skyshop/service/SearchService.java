@@ -6,7 +6,12 @@ package org.skypro.skyshop.service;
 
 import org.jetbrains.annotations.NotNull;
 import org.skypro.skyshop.model.search.SearchResult;
+import org.skypro.skyshop.model.search.Searchable;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Сервис поиска.
@@ -15,8 +20,9 @@ import org.springframework.stereotype.Service;
  * @version 1.1
  */
 @Service
-public class SearchService {
-    private final StorageService storageService;
+public final class SearchService {
+    @NotNull
+    private final StorageService storage;
 
     /**
      * Конструктор.
@@ -24,6 +30,50 @@ public class SearchService {
      * @param storageService экземпляр StorageService
      */
     public SearchService(@NotNull StorageService storageService) {
-        this.storageService = storageService;
+        // почему здесь не получается использовать this?
+        /*this.*/
+        storage = storageService;
+    }
+
+    /**
+     * Количество результатов поиска.
+     */
+    public static final int MAX_RESULTS = 10_000;
+
+    @NotNull
+    public Collection<SearchResult> search(@NotNull String pattern) {
+        Function<Searchable, SearchResult> toResult = SearchResult::fromSearchable;
+
+        // Это для отладки.
+        // Была ошибка в storage.getSearchableItems: я пытался возвращать
+        // TreeSet для Searchable, не озаботившись соответствующим компаратором.
+        // На этом потерял много времени, пока не начал пошаговую отладку запроса поиска
+        // и не увидел, что ошибка в .collect внутри storage.
+        var v0 = storage.getSearchableItems();
+        var v1 = v0.stream();
+        var v2 = v1.filter(searchable -> searchable.getSearchableTerm().contains(pattern));
+        var v3 = v2.distinct();
+        var v4 = v3.limit(MAX_RESULTS);
+        var v5 = v4.map(toResult);
+        var v6 = v5.collect(Collectors.toCollection(() -> new TreeSet<>(new SearchResultComparator())));
+
+        return v6;
+    }
+
+    /**
+     * Компаратор
+     * Статьи в результатах поиска должны выводиться, начиная от статьи с самым длинным именем и
+     * заканчивая статьей с самым коротким именем.
+     * Если длины имен одинаковые, то статьи должны сортироваться в натуральном порядке (для строк).
+     */
+    private static class SearchResultComparator implements Comparator<SearchResult> {
+        @Override
+        public int compare(SearchResult s1, SearchResult s2) {
+            int compareLength = Integer.compare(s2.getName().length(), s1.getName().length());
+            if (compareLength != 0) {
+                return compareLength;
+            }
+            return Objects.compare(s1.getName(), s2.getName(), String::compareTo);
+        }
     }
 }

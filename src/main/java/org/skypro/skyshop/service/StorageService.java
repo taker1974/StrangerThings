@@ -10,11 +10,12 @@ import org.skypro.skyshop.model.product.DiscountedProduct;
 import org.skypro.skyshop.model.product.FixPriceProduct;
 import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.product.SimpleProduct;
+import org.skypro.skyshop.model.search.Searchable;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Сервис хранения.
@@ -23,7 +24,7 @@ import java.util.UUID;
  * @version 1.1
  */
 @Service
-public class StorageService {
+public final class StorageService {
     @NotNull
     private final Map<UUID, Product> products;
     @NotNull
@@ -63,6 +64,17 @@ public class StorageService {
         return articles;
     }
 
+    /**
+     * @return коллекцию всех товаров и статей
+     */
+    @NotNull
+    public Collection<Searchable> getSearchableItems() {
+        var collection = Stream.of(products.values(), articles.values());
+        return collection
+                .flatMap(Collection::stream)
+                .collect(Collectors.toCollection(HashSet::new));
+    }
+
     private void addProduct(Product product) {
         products.put(product.getId(), product);
     }
@@ -71,6 +83,9 @@ public class StorageService {
         articles.put(article.getId(), article);
     }
 
+    /**
+     * Инициализация для демонстрации работы сервиса.
+     */
     public void InitializeWithSamples() {
         Product product1 = new SimpleProduct("Молоко", 80);
         Product product2 = new FixPriceProduct("Хлеб");
