@@ -20,26 +20,31 @@ import java.util.Collection;
  * @author Константин Терских, kostus.online.1974@yandex.ru, 2024
  * @version 1.1
  */
+@SuppressWarnings("unused")
 @RestController
 public class ShopController {
     private final StorageService storageService;
     private final SearchService searchService;
 
+    @SuppressWarnings("unused")
     public ShopController(StorageService storageService, SearchService searchService) {
         this.storageService = storageService;
         this.searchService = searchService;
     }
 
+    @SuppressWarnings("unused")
     @GetMapping("/products")
     public Collection<Product> getAllProducts(){
         return storageService.getProducts().values();
     }
 
+    @SuppressWarnings("unused")
     @GetMapping("/articles")
     public Collection<Article> getAllArticles(){
         return storageService.getArticles().values();
     }
 
+    @SuppressWarnings("unused")
     @GetMapping("/search")
     public Collection<SearchResult> getSearchResultsAll(String pattern){
         return searchService.search(pattern);

@@ -44,20 +44,17 @@ public final class SearchService {
     public Collection<SearchResult> search(@NotNull String pattern) {
         Function<Searchable, SearchResult> toResult = SearchResult::fromSearchable;
 
-        // Это для отладки.
         // Была ошибка в storage.getSearchableItems: я пытался возвращать
         // TreeSet для Searchable, не озаботившись соответствующим компаратором.
         // На этом потерял много времени, пока не начал пошаговую отладку запроса поиска
         // и не увидел, что ошибка в .collect внутри storage.
-        var v0 = storage.getSearchableItems();
-        var v1 = v0.stream();
-        var v2 = v1.filter(searchable -> searchable.getSearchableTerm().contains(pattern));
-        var v3 = v2.distinct();
-        var v4 = v3.limit(MAX_RESULTS);
-        var v5 = v4.map(toResult);
-        var v6 = v5.collect(Collectors.toCollection(() -> new TreeSet<>(new SearchResultComparator())));
 
-        return v6;
+        return storage.getSearchableItems().stream()
+                .filter(searchable -> searchable.getSearchableTerm().contains(pattern))
+                .distinct()
+                .limit(MAX_RESULTS)
+                .map(toResult)
+                .collect(Collectors.toCollection(() -> new TreeSet<>(new SearchResultComparator())));
     }
 
     /**

@@ -132,6 +132,7 @@ public final class StorageService {
      *
      * @return сервис хранения.
      */
+    @SuppressWarnings("unused")
     public static StorageService CreateWithSamples() {
         var storage = new StorageService();
         storage.InitializeWithSamples();
