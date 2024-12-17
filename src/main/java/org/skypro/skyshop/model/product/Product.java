@@ -18,12 +18,8 @@ import java.util.UUID;
  * @version 1.1
  */
 public abstract class Product implements Searchable {
+    public static final String SEARCHABLE_CONTENT_KIND = "PRODUCT";
     private final UUID id;
-
-    public UUID getId() {
-        return id;
-    }
-
     @NotNull
     private final String title;
 
@@ -38,6 +34,10 @@ public abstract class Product implements Searchable {
         }
         this.id = UUID.randomUUID();
         this.title = title;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     /**
@@ -84,8 +84,6 @@ public abstract class Product implements Searchable {
     public @NotNull String getSearchableTerm() {
         return toString();
     }
-
-    public static final String SEARCHABLE_CONTENT_KIND = "PRODUCT";
 
     @JsonIgnore
     @Override

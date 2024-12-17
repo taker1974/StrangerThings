@@ -34,19 +34,19 @@ public class ShopController {
 
     @SuppressWarnings("unused")
     @GetMapping("/products")
-    public Collection<Product> getAllProducts(){
+    public Collection<Product> getAllProducts() {
         return storageService.getProducts().values();
     }
 
     @SuppressWarnings("unused")
     @GetMapping("/articles")
-    public Collection<Article> getAllArticles(){
+    public Collection<Article> getAllArticles() {
         return storageService.getArticles().values();
     }
 
     @SuppressWarnings("unused")
     @GetMapping("/search")
-    public Collection<SearchResult> getSearchResultsAll(String pattern){
+    public Collection<SearchResult> getSearchResultsAll(String pattern) {
         return searchService.search(pattern);
     }
 }

@@ -18,27 +18,6 @@ public final class SearchResult {
     private final String contentType;
 
     /**
-     * @return ID результата поиска.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * @return Имя результата поиска.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @return тип содержимого поиска
-     */
-    public String getContentType() {
-        return contentType;
-    }
-
-    /**
      * Конструктор.
      *
      * @param id          ID
@@ -61,5 +40,26 @@ public final class SearchResult {
         return new SearchResult(searchable.getId().toString(),
                 searchable.getSearchableName(),
                 searchable.getSearchableContentKind());
+    }
+
+    /**
+     * @return ID результата поиска.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @return Имя результата поиска.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @return тип содержимого поиска
+     */
+    public String getContentType() {
+        return contentType;
     }
 }

@@ -9,7 +9,10 @@ import org.skypro.skyshop.model.search.SearchResult;
 import org.skypro.skyshop.model.search.Searchable;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Objects;
+import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -21,6 +24,10 @@ import java.util.stream.Collectors;
  */
 @Service
 public final class SearchService {
+    /**
+     * Количество результатов поиска.
+     */
+    public static final int MAX_RESULTS = 10_000;
     @NotNull
     private final StorageService storage;
 
@@ -34,11 +41,6 @@ public final class SearchService {
         /*this.*/
         storage = storageService;
     }
-
-    /**
-     * Количество результатов поиска.
-     */
-    public static final int MAX_RESULTS = 10_000;
 
     @NotNull
     public Collection<SearchResult> search(@NotNull String pattern) {

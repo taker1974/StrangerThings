@@ -25,11 +25,6 @@ import java.util.stream.Stream;
  */
 @Service
 public final class StorageService {
-    @NotNull
-    private final Map<UUID, Product> products;
-    @NotNull
-    private final Map<UUID, Article> articles;
-
     /**
      * Начальная вместимость хранилища ассортимента товаров.
      */
@@ -38,6 +33,10 @@ public final class StorageService {
      * Начальная вместимость хранилища статей.
      */
     public final int INITIAL_CAPACITY_ARTICLES = 100;
+    @NotNull
+    private final Map<UUID, Product> products;
+    @NotNull
+    private final Map<UUID, Article> articles;
 
     /**
      * Конструктор.
@@ -46,6 +45,18 @@ public final class StorageService {
         products = new HashMap<>(INITIAL_CAPACITY_PRODUCTS);
         articles = new HashMap<>(INITIAL_CAPACITY_ARTICLES);
         InitializeWithSamples();
+    }
+
+    /**
+     * Фабричный метод.
+     *
+     * @return сервис хранения.
+     */
+    @SuppressWarnings("unused")
+    public static StorageService CreateWithSamples() {
+        var storage = new StorageService();
+        storage.InitializeWithSamples();
+        return storage;
     }
 
     /**
@@ -125,17 +136,5 @@ public final class StorageService {
         addArticle(article2);
         addArticle(article3);
         addArticle(article4);
-    }
-
-    /**
-     * Фабричный метод.
-     *
-     * @return сервис хранения.
-     */
-    @SuppressWarnings("unused")
-    public static StorageService CreateWithSamples() {
-        var storage = new StorageService();
-        storage.InitializeWithSamples();
-        return storage;
     }
 }

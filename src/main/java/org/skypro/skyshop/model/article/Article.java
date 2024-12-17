@@ -21,12 +21,8 @@ import java.util.UUID;
  */
 @SuppressWarnings("all")
 public final class Article implements Searchable {
+    public static final String SEARCHABLE_CONTENT_KIND = "ARTICLE";
     private final UUID id;
-
-    public UUID getId() {
-        return id;
-    }
-
     @NotNull
     private final String title;
     @NotNull
@@ -42,6 +38,10 @@ public final class Article implements Searchable {
         this.id = UUID.randomUUID();
         this.title = title;
         this.content = content;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     /**
@@ -82,8 +82,6 @@ public final class Article implements Searchable {
     public @NotNull String getSearchableTerm() {
         return toString();
     }
-
-    public static final String SEARCHABLE_CONTENT_KIND = "ARTICLE";
 
     @JsonIgnore
     @Override
