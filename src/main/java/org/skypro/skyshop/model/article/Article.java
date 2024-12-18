@@ -45,8 +45,6 @@ public final class Article implements Searchable {
     }
 
     /**
-     * Получение заголовка статьи.
-     *
      * @return заголовок статьи
      */
     @NotNull
@@ -55,8 +53,6 @@ public final class Article implements Searchable {
     }
 
     /**
-     * Получение текста статьи.
-     *
      * @return текст статьи
      */
     @NotNull
@@ -69,6 +65,9 @@ public final class Article implements Searchable {
         return title + "\n" + content;
     }
 
+    /**
+     * @return имя, id объекта, по которому возможен поиск
+     */
     @JsonIgnore
     @NotNull
     public String getSearchableName() {

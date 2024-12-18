@@ -5,36 +5,44 @@
 package org.skypro.skyshop.model.basket;
 
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Класс, представляющий собой корзину для пользователя.<br>
  * Этот класс должен содержать список из BasketItem, а также<br>
  * дополнительное поле total - общую стоимость корзины.
  * Класс также должен быть неизменяемым, а его конструктор должен<br>
- * принимать в себя только список BasketItem.
+ * принимать в себя только список BasketItem.<br>
+ * (Это из условий ДЗ.)
  *
  * @author Константин Терских, kostus.online.1974@yandex.ru, 2024
  * @version 1.1
  */
 public final class UserBasket {
-    private final Collection<BasketItem> items;
+    private final Collection<BasketItem> basketItems;
+    private final int totalPrice;
 
     /**
      * Конструктор класса UserBasket.
      *
-     * @param items список из BasketItem
+     * @param basketItems список из BasketItem
      */
-    public UserBasket(Collection<BasketItem> items) {
-        this.items = items;
+    public UserBasket(Collection<BasketItem> basketItems, int totalPrice) {
+        this.basketItems = basketItems;
+        this.totalPrice = totalPrice;
     }
 
     /**
-     * Получение общей стоимости корзины.
-     *
+     * @return список из BasketItem
+     */
+    public Collection<BasketItem> getBasketItems() {
+        return Collections.unmodifiableCollection(basketItems);
+    }
+
+    /**
      * @return общая стоимость корзины
      */
     public int getTotalPrice() {
-        // TODO реализовать подсчёт общей цены корзины
-        return 123;
+        return totalPrice;
     }
 }

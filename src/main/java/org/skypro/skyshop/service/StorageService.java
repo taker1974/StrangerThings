@@ -11,7 +11,8 @@ import org.skypro.skyshop.model.product.FixPriceProduct;
 import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.product.SimpleProduct;
 import org.skypro.skyshop.model.search.Searchable;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,18 +24,22 @@ import java.util.stream.Stream;
  * @author Константин Терских, kostus.online.1974@yandex.ru, 2024
  * @version 1.1
  */
-@Service
+@Repository
+@Scope("singleton")
 public final class StorageService {
     /**
      * Начальная вместимость хранилища ассортимента товаров.
      */
     public final int INITIAL_CAPACITY_PRODUCTS = 100;
+
     /**
      * Начальная вместимость хранилища статей.
      */
     public final int INITIAL_CAPACITY_ARTICLES = 100;
+
     @NotNull
     private final Map<UUID, Product> products;
+
     @NotNull
     private final Map<UUID, Article> articles;
 
@@ -63,8 +68,8 @@ public final class StorageService {
      * @return коллекцию всего ассортимента продуктов
      */
     @NotNull
-    public Map<UUID, Product> getProducts() {
-        return products;
+    public Map<UUID, Product> getProductsAll() {
+        return Collections.unmodifiableMap(products);
     }
 
     /**
@@ -73,16 +78,27 @@ public final class StorageService {
      * @param id идентификатор
      * @return товар или пустой
      */
+    @NotNull
     public Optional<Product> getProductById(@NotNull UUID id) {
         return Optional.ofNullable(products.get(id));
+    }
+
+    /**
+     * Отладочный метод получения товара.
+     *
+     * @return первый товар или пустой
+     */
+    @NotNull
+    public Optional<Product> getFirstProduct() {
+        return Optional.ofNullable(products.get(products.keySet().iterator().next()));
     }
 
     /**
      * @return коллекцию всех статей
      */
     @NotNull
-    public Map<UUID, Article> getArticles() {
-        return articles;
+    public Map<UUID, Article> getArticlesAll() {
+        return Collections.unmodifiableMap(articles);
     }
 
     /**

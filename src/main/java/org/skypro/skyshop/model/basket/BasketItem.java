@@ -4,6 +4,7 @@
 
 package org.skypro.skyshop.model.basket;
 
+import org.jetbrains.annotations.NotNull;
 import org.skypro.skyshop.model.product.Product;
 
 /**
@@ -23,26 +24,30 @@ public final class BasketItem {
      * @param product продукт
      * @param count   количество
      */
-    public BasketItem(Product product, int count) {
+    public BasketItem(@NotNull Product product, int count) {
         this.product = product;
         this.count = count;
     }
 
     /**
-     * Возвращает продукт.
-     *
-     * @return продукт
+     * @return вид продукта в элементе корзины
      */
+    @NotNull
     public Product getProduct() {
         return product;
     }
 
     /**
-     * Возвращает количество.
-     *
-     * @return количество
+     * @return количество продукта одного типа в элементе корзины
      */
     public int getCount() {
         return count;
+    }
+
+    /**
+     * @return общая стоимость продукта в элементе корзины
+     */
+    public int getTotalPrice() {
+        return product.getPrice() * count;
     }
 }

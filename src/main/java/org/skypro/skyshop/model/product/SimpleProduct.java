@@ -30,11 +30,6 @@ public final class SimpleProduct extends Product {
         this.price = price;
     }
 
-    /**
-     * Получить цену продукта.
-     *
-     * @return цена продукта.
-     */
     @Override
     public int getPrice() {
         return price;

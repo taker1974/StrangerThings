@@ -19,7 +19,10 @@ import java.util.UUID;
  */
 public abstract class Product implements Searchable {
     public static final String SEARCHABLE_CONTENT_KIND = "PRODUCT";
+
+    @NotNull
     private final UUID id;
+
     @NotNull
     private final String title;
 
@@ -36,13 +39,11 @@ public abstract class Product implements Searchable {
         this.title = title;
     }
 
-    public UUID getId() {
+    public @NotNull UUID getId() {
         return id;
     }
 
     /**
-     * Получить название продукта.
-     *
      * @return название продукта.
      */
     @NotNull
@@ -51,8 +52,6 @@ public abstract class Product implements Searchable {
     }
 
     /**
-     * Получить цену продукта.
-     *
      * @return цена продукта.
      */
     public abstract int getPrice();
@@ -63,8 +62,6 @@ public abstract class Product implements Searchable {
     }
 
     /**
-     * Проверить, является ли продукт специальным.
-     *
      * @return true, если продукт специальный.
      */
     public boolean isSpecial() {

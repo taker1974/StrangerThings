@@ -5,12 +5,19 @@
 package org.skypro.skyshop.model.basket;
 
 import org.jetbrains.annotations.NotNull;
-import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+/* Шаг 1. Добавление компонента корзины
+    Корзина будет представлять из себя @SessionScoped.
+    Компонент внутри будет содержать только Map с id товара в качестве ключа и Integer в качестве значения.
+    Integer нам нужен, так как один товар можно добавлять в корзину несколько раз.
+    Создайте класс ProductBasket в подпакете model.basket
+*/
 
 /**
  * Корзина товаров.
@@ -19,7 +26,7 @@ import java.util.UUID;
  * @author Константин Терских, kostus.online.1974@yandex.ru, 2024
  * @version 1.1
  */
-@SessionScope
+@Component
 public final class ProductBasket {
     private final Map<UUID, Integer> basket;
 
@@ -30,6 +37,9 @@ public final class ProductBasket {
         this.basket = new HashMap<>();
     }
 
+    /*  Метод добавления продукта в корзину. Он будет принимать UUID id
+        и не будет ничего возвращать. */
+
     /**
      * Добавить товар в корзину.
      *
@@ -38,13 +48,17 @@ public final class ProductBasket {
      */
     public void addProduct(@NotNull UUID productId, int quantity) {
         if (quantity <= 0) {
-            throw new IllegalArgumentException("Количество добавляемых продуктов должно быть больше 0");
+            quantity = 1;
         }
-        basket.put(productId, basket.getOrDefault(productId, 0) + quantity);
+        var value = basket.getOrDefault(productId, 0) + quantity;
+        basket.put(productId, value);
     }
 
+    /*  Метод получения всех продуктов, которые сейчас есть в корзине. Он должен возвращать ту же
+        мапу Map<UUID, Integer>, которая хранится в поле.
+        Чтобы защитить нас от возможных изменений этой мапы, нужно обернуть ее в Collections.unmodifiableMap */
+
     /**
-     * Вернуть массив товаров в корзине.
      * @return массив товаров Map<UUID, Integer>, обёрнутый в Collections.unmodifiableMap
      */
     public Map<UUID, Integer> getProductsAll() {

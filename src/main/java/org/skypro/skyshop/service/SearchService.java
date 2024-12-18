@@ -42,6 +42,12 @@ public final class SearchService {
         storage = storageService;
     }
 
+    /**
+     * Поиск по шаблону.
+     *
+     * @param pattern шаблон поиска
+     * @return коллекция результатов поиска
+     */
     @NotNull
     public Collection<SearchResult> search(@NotNull String pattern) {
         Function<Searchable, SearchResult> toResult = SearchResult::fromSearchable;

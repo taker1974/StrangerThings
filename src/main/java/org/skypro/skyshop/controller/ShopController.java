@@ -5,8 +5,10 @@
 package org.skypro.skyshop.controller;
 
 import org.skypro.skyshop.model.article.Article;
+import org.skypro.skyshop.model.basket.UserBasket;
 import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.search.SearchResult;
+import org.skypro.skyshop.service.BasketService;
 import org.skypro.skyshop.service.SearchService;
 import org.skypro.skyshop.service.StorageService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,36 +29,44 @@ import java.util.UUID;
 public class ShopController {
     private final StorageService storageService;
     private final SearchService searchService;
+    private final BasketService basketService;
 
-    @SuppressWarnings("unused")
-    public ShopController(StorageService storageService, SearchService searchService) {
+    public ShopController(StorageService storageService,
+                          SearchService searchService,
+                          BasketService basketService) {
         this.storageService = storageService;
         this.searchService = searchService;
+        this.basketService = basketService;
     }
 
-    @SuppressWarnings("unused")
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
+
     @GetMapping("/products")
     public Collection<Product> getAllProducts() {
-        return storageService.getProducts().values();
+        return storageService.getProductsAll().values();
     }
 
-    @SuppressWarnings("unused")
     @GetMapping("/articles")
     public Collection<Article> getAllArticles() {
-        return storageService.getArticles().values();
+        return storageService.getArticlesAll().values();
     }
 
-    @SuppressWarnings("unused")
     @GetMapping("/search")
     public Collection<SearchResult> getSearchResultsAll(String pattern) {
         return searchService.search(pattern);
     }
 
     @GetMapping("/basket/{id}")
-    public String addProduct(@PathVariable("id") UUID id){
-        try {
+    public String addProduct(@PathVariable("id") UUID id) {
+        basketService.addProduct(id);
+        return "Товар добавлен в корзину";
+    }
 
-            return "Товар добавлен в корзину";
-        }
+    @GetMapping("/basket")
+    public UserBasket getUserBasket() {
+        return basketService.getUserBasket();
     }
 }
