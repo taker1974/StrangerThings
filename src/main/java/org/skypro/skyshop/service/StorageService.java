@@ -68,6 +68,16 @@ public final class StorageService {
     }
 
     /**
+     * Получение товара по идентификатору.
+     *
+     * @param id идентификатор
+     * @return товар или пустой
+     */
+    public Optional<Product> getProductById(@NotNull UUID id) {
+        return Optional.ofNullable(products.get(id));
+    }
+
+    /**
      * @return коллекцию всех статей
      */
     @NotNull

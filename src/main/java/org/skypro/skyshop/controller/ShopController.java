@@ -10,9 +10,11 @@ import org.skypro.skyshop.model.search.SearchResult;
 import org.skypro.skyshop.service.SearchService;
 import org.skypro.skyshop.service.StorageService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Контроллер магазина.
@@ -48,5 +50,13 @@ public class ShopController {
     @GetMapping("/search")
     public Collection<SearchResult> getSearchResultsAll(String pattern) {
         return searchService.search(pattern);
+    }
+
+    @GetMapping("/basket/{id}")
+    public String addProduct(@PathVariable("id") UUID id){
+        try {
+
+            return "Товар добавлен в корзину";
+        }
     }
 }
