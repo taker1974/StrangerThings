@@ -29,14 +29,17 @@ public final class StorageService {
      * Начальная вместимость хранилища ассортимента товаров.
      */
     public final int INITIAL_CAPACITY_PRODUCTS = 100;
+
     /**
      * Начальная вместимость хранилища статей.
      */
     public final int INITIAL_CAPACITY_ARTICLES = 100;
-    @NotNull
-    private final Map<UUID, Product> products;
-    @NotNull
-    private final Map<UUID, Article> articles;
+
+    private @NotNull
+    final Map<UUID, Product> products;
+
+    private @NotNull
+    final Map<UUID, Article> articles;
 
     /**
      * Конструктор.
@@ -62,24 +65,21 @@ public final class StorageService {
     /**
      * @return коллекцию всего ассортимента продуктов
      */
-    @NotNull
-    public Map<UUID, Product> getProducts() {
+    public @NotNull Map<UUID, Product> getProducts() {
         return products;
     }
 
     /**
      * @return коллекцию всех статей
      */
-    @NotNull
-    public Map<UUID, Article> getArticles() {
+    public @NotNull Map<UUID, Article> getArticles() {
         return articles;
     }
 
     /**
      * @return коллекцию всех товаров и статей
      */
-    @NotNull
-    public Collection<Searchable> getSearchableItems() {
+    public @NotNull Collection<Searchable> getSearchableItems() {
         var collection = Stream.of(products.values(), articles.values());
         return collection
                 .flatMap(Collection::stream)

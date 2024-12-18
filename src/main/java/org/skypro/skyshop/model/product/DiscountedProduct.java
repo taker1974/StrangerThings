@@ -37,11 +37,6 @@ public final class DiscountedProduct extends Product {
         this.discount = discount;
     }
 
-    /**
-     * Получить цену продукта.
-     *
-     * @return цена продукта.
-     */
     @Override
     public int getPrice() {
         return basePrice - (int) ((double) (basePrice * discount) / 100.0);

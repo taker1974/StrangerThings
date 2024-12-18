@@ -26,7 +26,7 @@ public abstract class Product implements Searchable {
     /**
      * Конструктор.
      *
-     * @param title название продукта.
+     * @param title название продукта
      */
     public Product(@NotNull String title) {
         if (title.isBlank()) {
@@ -41,9 +41,7 @@ public abstract class Product implements Searchable {
     }
 
     /**
-     * Получить название продукта.
-     *
-     * @return название продукта.
+     * @return название продукта
      */
     @NotNull
     public String getTitle() {
@@ -51,9 +49,7 @@ public abstract class Product implements Searchable {
     }
 
     /**
-     * Получить цену продукта.
-     *
-     * @return цена продукта.
+     * @return цена продукта
      */
     public abstract int getPrice();
 
@@ -63,9 +59,7 @@ public abstract class Product implements Searchable {
     }
 
     /**
-     * Проверить, является ли продукт специальным.
-     *
-     * @return true, если продукт специальный.
+     * @return true, если продукт специальный
      */
     public boolean isSpecial() {
         return false;

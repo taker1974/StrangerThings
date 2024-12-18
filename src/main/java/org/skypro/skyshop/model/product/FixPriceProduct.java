@@ -24,11 +24,6 @@ public final class FixPriceProduct extends Product {
         super(title);
     }
 
-    /**
-     * Получить цену продукта.
-     *
-     * @return цена продукта.
-     */
     @Override
     public int getPrice() {
         return FIXED_PRICE;

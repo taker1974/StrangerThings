@@ -43,14 +43,14 @@ public final class SearchResult {
     }
 
     /**
-     * @return ID результата поиска.
+     * @return ID результата поиска
      */
     public String getId() {
         return id;
     }
 
     /**
-     * @return Имя результата поиска.
+     * @return имя результата поиска
      */
     public String getName() {
         return name;

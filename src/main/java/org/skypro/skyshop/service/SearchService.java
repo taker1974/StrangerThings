@@ -28,8 +28,8 @@ public final class SearchService {
      * Количество результатов поиска.
      */
     public static final int MAX_RESULTS = 10_000;
-    @NotNull
-    private final StorageService storage;
+
+    private @NotNull final StorageService storage;
 
     /**
      * Конструктор.
@@ -42,8 +42,7 @@ public final class SearchService {
         storage = storageService;
     }
 
-    @NotNull
-    public Collection<SearchResult> search(@NotNull String pattern) {
+    public @NotNull Collection<SearchResult> search(@NotNull String pattern) {
         Function<Searchable, SearchResult> toResult = SearchResult::fromSearchable;
 
         // Была ошибка в storage.getSearchableItems: я пытался возвращать
