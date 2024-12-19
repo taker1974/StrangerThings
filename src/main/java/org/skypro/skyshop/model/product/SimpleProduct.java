@@ -18,8 +18,8 @@ public final class SimpleProduct extends Product {
     /**
      * Конструктор.
      *
-     * @param title название продукта.
-     * @param price цена продукта.
+     * @param title название продукта
+     * @param price цена продукта
      */
     public SimpleProduct(@NotNull String title, int price) {
         super(title);

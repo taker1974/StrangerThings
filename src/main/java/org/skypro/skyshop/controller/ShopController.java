@@ -20,7 +20,6 @@ import java.util.Collection;
  * @author Константин Терских, kostus.online.1974@yandex.ru, 2024
  * @version 1.1
  */
-@SuppressWarnings("unused")
 @RestController
 public class ShopController {
     private final StorageService storageService;
@@ -32,12 +31,12 @@ public class ShopController {
     }
 
     @GetMapping("/products")
-    public Collection<Product> getAllProducts() {
+    public Collection<Product> getProductsAll() {
         return storageService.getProducts().values();
     }
 
     @GetMapping("/articles")
-    public Collection<Article> getAllArticles() {
+    public Collection<Article> getArticlesAll() {
         return storageService.getArticles().values();
     }
 

@@ -19,8 +19,8 @@ public final class DiscountedProduct extends Product {
     /**
      * Конструктор.
      *
-     * @param title     название продукта.
-     * @param basePrice базовая цена продукта.
+     * @param title     название продукта
+     * @param basePrice базовая цена продукта
      * @param discount  скидка, 0..100%
      */
     public DiscountedProduct(@NotNull String title, int basePrice, int discount) {

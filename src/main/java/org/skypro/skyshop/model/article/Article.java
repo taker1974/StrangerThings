@@ -19,10 +19,10 @@ import java.util.UUID;
  * @author Константин Терских, kostus.online.1974@yandex.ru, 2024
  * @version 1.1
  */
-@SuppressWarnings("all")
 public final class Article implements Searchable {
     public static final String SEARCHABLE_CONTENT_KIND = "ARTICLE";
 
+    @NotNull
     private final UUID id;
 
     @NotNull
@@ -49,18 +49,18 @@ public final class Article implements Searchable {
     }
 
     /**
-     * Получение заголовка статьи.
-     *
      * @return заголовок статьи
      */
-    public @NotNull String getTitle() {
+    @NotNull
+    public String getTitle() {
         return title;
     }
 
     /**
      * @return текст статьи
      */
-    public @NotNull String getContent() {
+    @NotNull
+    public String getContent() {
         return content;
     }
 
@@ -69,8 +69,10 @@ public final class Article implements Searchable {
         return title + "\n" + content;
     }
 
+    @Override
     @JsonIgnore
-    public @NotNull String getSearchableName() {
+    @NotNull
+    public String getSearchableName() {
         return this.getClass().getSimpleName() + "-" +
                 SEARCHABLE_CONTENT_KIND + "-" +
                 Integer.toHexString(Math.abs(hashCode())) + ": " +
@@ -78,13 +80,15 @@ public final class Article implements Searchable {
     }
 
     @Override
-    public @NotNull String getSearchableTerm() {
+    @NotNull
+    public String getSearchableTerm() {
         return toString();
     }
 
     @JsonIgnore
     @Override
-    public @NotNull String getSearchableContentKind() {
+    @NotNull
+    public String getSearchableContentKind() {
         return SEARCHABLE_CONTENT_KIND;
     }
 

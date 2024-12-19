@@ -12,24 +12,26 @@ public interface Searchable {
     /**
      * @return Идентификатор
      */
+    @NotNull
     UUID getId();
 
     /**
      * @return Имя объекта Searchable
      */
-    @SuppressWarnings("unused")
-    default @NotNull String getSearchableName() {
+    @NotNull
+    default String getSearchableName() {
         return this.getClass().getSimpleName() + "-" + this.hashCode();
     }
 
     /**
      * @return Содержимое, по которому производится поиск
      */
-    @NotNull String getSearchableTerm();
+    @NotNull
+    String getSearchableTerm();
 
     /**
      * @return Вид содержимого, по которому производится поиск
      */
-    @SuppressWarnings("unused")
-    @NotNull String getSearchableContentKind();
+    @NotNull
+    String getSearchableContentKind();
 }
