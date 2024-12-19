@@ -32,13 +32,17 @@ import java.util.UUID;
 @Component
 @SessionScope
 public class ProductBasket {
+
+    public static final int BASKET_INITIAL_CAPACITY = 10;
+
+    @NotNull
     private final Map<UUID, Integer> basket;
 
     /**
      * Конструктор корзины.
      */
     public ProductBasket() {
-        this.basket = new HashMap<>();
+        this.basket = HashMap.newHashMap(BASKET_INITIAL_CAPACITY);
     }
 
     /*  Метод добавления продукта в корзину. Он будет принимать UUID id

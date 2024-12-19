@@ -21,6 +21,8 @@ import java.util.Collections;
  * @version 1.1
  */
 public final class UserBasket {
+
+    @NotNull
     private final Collection<BasketItem> basketItems;
     private final int totalPrice;
 
@@ -29,7 +31,7 @@ public final class UserBasket {
      *
      * @param basketItems список из BasketItem
      */
-    public UserBasket(Collection<BasketItem> basketItems, int totalPrice) {
+    public UserBasket(@NotNull Collection<BasketItem> basketItems, int totalPrice) {
         this.basketItems = basketItems;
         this.totalPrice = totalPrice;
     }

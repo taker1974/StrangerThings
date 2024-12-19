@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
  * @version 1.1
  */
 public final class FixPriceProduct extends Product {
-    private final static int FIXED_PRICE = 100;
+    public static final int CURRENT_FIXED_PRICE = 100;
 
     /**
      * Конструктор.
@@ -26,12 +26,12 @@ public final class FixPriceProduct extends Product {
 
     @Override
     public int getPrice() {
-        return FIXED_PRICE;
+        return CURRENT_FIXED_PRICE;
     }
 
     @Override
     public String toString() {
-        return getTitle() + ": Фиксированная цена " + FIXED_PRICE;
+        return getTitle() + ": Фиксированная цена " + CURRENT_FIXED_PRICE;
     }
 
     @Override

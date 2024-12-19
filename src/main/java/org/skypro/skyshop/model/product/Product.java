@@ -31,7 +31,7 @@ public abstract class Product implements Searchable {
      *
      * @param title название продукта
      */
-    public Product(@NotNull String title) {
+    protected Product(@NotNull String title) {
         if (title.isBlank()) {
             throw new IllegalArgumentException("Наименование продукта не может быть пустым");
         }
@@ -53,7 +53,7 @@ public abstract class Product implements Searchable {
     }
 
     /**
-     * @return цена продукта.
+     * @return цена продукта
      */
     public abstract int getPrice();
 
@@ -70,6 +70,7 @@ public abstract class Product implements Searchable {
     }
 
     @JsonIgnore
+    @Override
     @NotNull
     public String getSearchableName() {
         return this.getClass().getSimpleName() + "-" +

@@ -19,8 +19,8 @@ import java.util.UUID;
  * @author Константин Терских, kostus.online.1974@yandex.ru, 2024
  * @version 1.1
  */
-@SuppressWarnings("all")
 public final class Article implements Searchable {
+
     public static final String SEARCHABLE_CONTENT_KIND = "ARTICLE";
 
     @NotNull
@@ -70,10 +70,8 @@ public final class Article implements Searchable {
         return title + "\n" + content;
     }
 
-    /**
-     * @return имя, id объекта, по которому возможен поиск
-     */
     @JsonIgnore
+    @Override
     @NotNull
     public String getSearchableName() {
         return this.getClass().getSimpleName() + "-" +
@@ -83,13 +81,15 @@ public final class Article implements Searchable {
     }
 
     @Override
-    public @NotNull String getSearchableTerm() {
+    @NotNull
+    public String getSearchableTerm() {
         return toString();
     }
 
     @JsonIgnore
     @Override
-    public @NotNull String getSearchableContentKind() {
+    @NotNull
+    public String getSearchableContentKind() {
         return SEARCHABLE_CONTENT_KIND;
     }
 

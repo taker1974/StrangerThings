@@ -19,7 +19,7 @@ public final class DiscountedProduct extends Product {
     /**
      * Конструктор.
      *
-     * @param title     название продукта.
+     * @param title     название продукта
      * @param basePrice базовая цена продукта
      * @param discount  скидка, 0..100%
      */
@@ -39,7 +39,7 @@ public final class DiscountedProduct extends Product {
 
     @Override
     public int getPrice() {
-        return basePrice - (int) ((double) (basePrice * discount) / 100.0);
+        return basePrice - (int) ((double)(basePrice * discount) / 100.0);
     }
 
     @Override

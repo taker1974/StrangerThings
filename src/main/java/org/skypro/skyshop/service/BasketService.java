@@ -85,6 +85,7 @@ public class BasketService {
     /**
      * @return корзина пользователя {@link UserBasket}
      */
+    @NotNull
     public UserBasket getUserBasket() {
         Function<Map.Entry<UUID, Integer>, BasketItem> toBasketItem = entry -> {
             var product = storageService.getProductById(entry.getKey());
