@@ -4,6 +4,8 @@
 
 package org.skypro.skyshop.controller;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.skypro.skyshop.model.article.Article;
 import org.skypro.skyshop.model.basket.UserBasket;
 import org.skypro.skyshop.model.product.Product;
@@ -39,27 +41,32 @@ public class ShopController {
     }
 
     @GetMapping("/products")
+    @NotNull
     public Collection<Product> getProductsAll() {
         return storageService.getProductsAll().values();
     }
 
     @GetMapping("/articles")
+    @NotNull
     public Collection<Article> getArticlesAll() {
         return storageService.getArticlesAll().values();
     }
 
     @GetMapping("/search")
-    public Collection<SearchResult> getSearchResultsAll(String pattern) {
+    @NotNull
+    public Collection<SearchResult> getSearchResultsAll(@Nullable String pattern) {
         return searchService.search(pattern);
     }
 
     @GetMapping("/basket/{id}")
+    @NotNull
     public String addProduct(@PathVariable("id") UUID id) {
         basketService.addProduct(id);
         return "Товар добавлен в корзину";
     }
 
     @GetMapping("/basket")
+    @NotNull
     public UserBasket getUserBasket() {
         return basketService.getUserBasket();
     }

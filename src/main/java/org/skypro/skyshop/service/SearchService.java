@@ -5,6 +5,7 @@
 package org.skypro.skyshop.service;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.skypro.skyshop.model.search.SearchResult;
 import org.skypro.skyshop.model.search.Searchable;
 import org.springframework.context.annotation.Scope;
@@ -54,7 +55,14 @@ public class SearchService {
      * @return коллекция результатов поиска
      */
     @NotNull
-    public Collection<SearchResult> search(@NotNull String pattern) {
+    public Collection<SearchResult> search(@Nullable String pattern) {
+        if (Objects.isNull(pattern)) {
+            return new TreeSet<>(new SearchResultComparator());
+        }
+        if (pattern.isEmpty()) {
+            return new TreeSet<>(new SearchResultComparator());
+        }
+
         Function<Searchable, SearchResult> toResult = SearchResult::fromSearchable;
 
         // Была ошибка в storage.getSearchableItems: я пытался возвращать
