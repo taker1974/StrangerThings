@@ -8,7 +8,10 @@ import org.jetbrains.annotations.NotNull;
 import org.skypro.skyshop.model.basket.BasketItem;
 import org.skypro.skyshop.model.basket.ProductBasket;
 import org.skypro.skyshop.model.basket.UserBasket;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -24,6 +27,8 @@ import java.util.stream.Collectors;
     Эти поля нужно инициализировать через конструктор, как обычно, используя constructor injection.
 */
 
+// https://www.baeldung.com/spring-bean-scopes
+
 /**
  * Сервис корзины товаров.
  *
@@ -31,7 +36,8 @@ import java.util.stream.Collectors;
  * @version 1.1
  */
 @Service
-public final class BasketService {
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class BasketService {
     private final ProductBasket productBasket;
     private final StorageService storageService;
 

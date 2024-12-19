@@ -7,7 +7,10 @@ package org.skypro.skyshop.service;
 import org.jetbrains.annotations.NotNull;
 import org.skypro.skyshop.model.search.SearchResult;
 import org.skypro.skyshop.model.search.Searchable;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -16,6 +19,8 @@ import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+// https://www.baeldung.com/spring-bean-scopes
+
 /**
  * Сервис поиска.
  *
@@ -23,7 +28,8 @@ import java.util.stream.Collectors;
  * @version 1.1
  */
 @Service
-public final class SearchService {
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class SearchService {
     /**
      * Количество результатов поиска.
      */

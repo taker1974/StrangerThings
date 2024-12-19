@@ -6,6 +6,7 @@ package org.skypro.skyshop.model.basket;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,6 +20,8 @@ import java.util.UUID;
     Создайте класс ProductBasket в подпакете model.basket
 */
 
+// https://www.baeldung.com/spring-bean-scopes
+
 /**
  * Корзина товаров.
  * Содержит информацию об UUID продукта о количестве каждого товара в корзине.
@@ -27,7 +30,8 @@ import java.util.UUID;
  * @version 1.1
  */
 @Component
-public final class ProductBasket {
+@SessionScope
+public class ProductBasket {
     private final Map<UUID, Integer> basket;
 
     /**

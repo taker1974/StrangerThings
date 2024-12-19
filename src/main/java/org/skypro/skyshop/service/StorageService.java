@@ -11,12 +11,15 @@ import org.skypro.skyshop.model.product.FixPriceProduct;
 import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.product.SimpleProduct;
 import org.skypro.skyshop.model.search.Searchable;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+// https://www.baeldung.com/spring-bean-scopes
 
 /**
  * Сервис хранения.
@@ -25,7 +28,7 @@ import java.util.stream.Stream;
  * @version 1.1
  */
 @Repository
-@Scope("singleton")
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public final class StorageService {
     /**
      * Начальная вместимость хранилища ассортимента товаров.
@@ -88,6 +91,7 @@ public final class StorageService {
      *
      * @return первый товар или пустой
      */
+    @SuppressWarnings("unused")
     @NotNull
     public Optional<Product> getFirstProduct() {
         return Optional.ofNullable(products.get(products.keySet().iterator().next()));
