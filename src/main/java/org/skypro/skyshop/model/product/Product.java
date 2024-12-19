@@ -4,6 +4,7 @@
 
 package org.skypro.skyshop.model.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.jetbrains.annotations.NotNull;
 import org.skypro.skyshop.model.search.Searchable;
 
@@ -17,19 +18,15 @@ import java.util.UUID;
  * @version 1.1
  */
 public abstract class Product implements Searchable {
+    public static final String SEARCHABLE_CONTENT_KIND = "PRODUCT";
     private final UUID id;
-
-    public UUID getId() {
-        return id;
-    }
-
     @NotNull
     private final String title;
 
     /**
      * Конструктор.
      *
-     * @param title название продукта.
+     * @param title название продукта
      */
     public Product(@NotNull String title) {
         if (title.isBlank()) {
@@ -39,10 +36,12 @@ public abstract class Product implements Searchable {
         this.title = title;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     /**
-     * Получить название продукта.
-     *
-     * @return название продукта.
+     * @return название продукта
      */
     @NotNull
     public String getTitle() {
@@ -50,9 +49,7 @@ public abstract class Product implements Searchable {
     }
 
     /**
-     * Получить цену продукта.
-     *
-     * @return цена продукта.
+     * @return цена продукта
      */
     public abstract int getPrice();
 
@@ -62,14 +59,13 @@ public abstract class Product implements Searchable {
     }
 
     /**
-     * Проверить, является ли продукт специальным.
-     *
-     * @return true, если продукт специальный.
+     * @return true, если продукт специальный
      */
     public boolean isSpecial() {
         return false;
     }
 
+    @JsonIgnore
     @NotNull
     public String getSearchableName() {
         return this.getClass().getSimpleName() + "-" +
@@ -83,8 +79,7 @@ public abstract class Product implements Searchable {
         return toString();
     }
 
-    public static final String SEARCHABLE_CONTENT_KIND = "PRODUCT";
-
+    @JsonIgnore
     @Override
     public @NotNull String getSearchableContentKind() {
         return SEARCHABLE_CONTENT_KIND;

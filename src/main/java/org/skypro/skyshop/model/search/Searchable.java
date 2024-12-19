@@ -18,21 +18,18 @@ public interface Searchable {
      * @return Имя объекта Searchable
      */
     @SuppressWarnings("unused")
-    @NotNull
-    default String getSearchableName() {
+    default @NotNull String getSearchableName() {
         return this.getClass().getSimpleName() + "-" + this.hashCode();
     }
 
     /**
      * @return Содержимое, по которому производится поиск
      */
-    @NotNull
-    String getSearchableTerm();
+    @NotNull String getSearchableTerm();
 
     /**
      * @return Вид содержимого, по которому производится поиск
      */
     @SuppressWarnings("unused")
-    @NotNull
-    String getSearchableContentKind();
+    @NotNull String getSearchableContentKind();
 }

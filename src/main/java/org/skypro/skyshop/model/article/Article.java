@@ -4,6 +4,7 @@
 
 package org.skypro.skyshop.model.article;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.jetbrains.annotations.NotNull;
 import org.skypro.skyshop.model.search.Searchable;
 
@@ -20,14 +21,13 @@ import java.util.UUID;
  */
 @SuppressWarnings("all")
 public final class Article implements Searchable {
-    private final UUID id;
+    public static final String SEARCHABLE_CONTENT_KIND = "ARTICLE";
 
-    public UUID getId() {
-        return id;
-    }
+    private final UUID id;
 
     @NotNull
     private final String title;
+
     @NotNull
     private final String content;
 
@@ -43,23 +43,24 @@ public final class Article implements Searchable {
         this.content = content;
     }
 
+    @NotNull
+    public UUID getId() {
+        return id;
+    }
+
     /**
      * Получение заголовка статьи.
      *
      * @return заголовок статьи
      */
-    @NotNull
-    public String getTitle() {
+    public @NotNull String getTitle() {
         return title;
     }
 
     /**
-     * Получение текста статьи.
-     *
      * @return текст статьи
      */
-    @NotNull
-    public String getContent() {
+    public @NotNull String getContent() {
         return content;
     }
 
@@ -68,8 +69,8 @@ public final class Article implements Searchable {
         return title + "\n" + content;
     }
 
-    @NotNull
-    public String getSearchableName() {
+    @JsonIgnore
+    public @NotNull String getSearchableName() {
         return this.getClass().getSimpleName() + "-" +
                 SEARCHABLE_CONTENT_KIND + "-" +
                 Integer.toHexString(Math.abs(hashCode())) + ": " +
@@ -81,8 +82,7 @@ public final class Article implements Searchable {
         return toString();
     }
 
-    public static final String SEARCHABLE_CONTENT_KIND = "ARTICLE";
-
+    @JsonIgnore
     @Override
     public @NotNull String getSearchableContentKind() {
         return SEARCHABLE_CONTENT_KIND;

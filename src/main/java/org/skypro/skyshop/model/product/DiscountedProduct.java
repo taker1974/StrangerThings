@@ -19,9 +19,9 @@ public final class DiscountedProduct extends Product {
     /**
      * Конструктор.
      *
-     * @param title название продукта.
+     * @param title     название продукта.
      * @param basePrice базовая цена продукта.
-     * @param discount скидка, 0..100%
+     * @param discount  скидка, 0..100%
      */
     public DiscountedProduct(@NotNull String title, int basePrice, int discount) {
         super(title);
@@ -37,19 +37,14 @@ public final class DiscountedProduct extends Product {
         this.discount = discount;
     }
 
-    /**
-     * Получить цену продукта.
-     *
-     * @return цена продукта.
-     */
     @Override
     public int getPrice() {
-        return basePrice - (int)((double)(basePrice * discount) / 100.0);
+        return basePrice - (int) ((double) (basePrice * discount) / 100.0);
     }
 
     @Override
     public String toString() {
-        return getTitle() + ": " + getPrice() + " (скидка "+ discount + "%)";
+        return getTitle() + ": " + getPrice() + " (скидка " + discount + "%)";
     }
 
     @Override
