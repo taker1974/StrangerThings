@@ -13,6 +13,8 @@ import org.jetbrains.annotations.NotNull;
  * @version 1.1
  */
 public final class SearchResult {
+
+    @NotNull
     private final String name;
 
     /**
