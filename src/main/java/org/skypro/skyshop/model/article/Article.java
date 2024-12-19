@@ -1,6 +1,6 @@
 // SkyPro
 // Терских Константин, kostus.online.1974@yandex.ru, 2024
-// Домашнее задание по теме "Java Collections Framework: Set"
+// Домашнее задание по теме "Жизненный цикл компонентов Spring Boot приложения"
 
 package org.skypro.skyshop.model.article;
 
@@ -22,9 +22,13 @@ import java.util.UUID;
 @SuppressWarnings("all")
 public final class Article implements Searchable {
     public static final String SEARCHABLE_CONTENT_KIND = "ARTICLE";
+
+    @NotNull
     private final UUID id;
+
     @NotNull
     private final String title;
+
     @NotNull
     private final String content;
 
@@ -40,6 +44,7 @@ public final class Article implements Searchable {
         this.content = content;
     }
 
+    @NotNull
     public UUID getId() {
         return id;
     }

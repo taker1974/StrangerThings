@@ -1,6 +1,6 @@
 // SkyPro
 // Терских Константин, kostus.online.1974@yandex.ru, 2024
-// Домашнее задание по теме "Введение в веб-программирование с Spring Boot"
+// Домашнее задание по теме "Жизненный цикл компонентов Spring Boot приложения"
 
 package org.skypro.skyshop.model.product;
 
@@ -29,7 +29,7 @@ public abstract class Product implements Searchable {
     /**
      * Конструктор.
      *
-     * @param title название продукта.
+     * @param title название продукта
      */
     public Product(@NotNull String title) {
         if (title.isBlank()) {
@@ -39,12 +39,13 @@ public abstract class Product implements Searchable {
         this.title = title;
     }
 
-    public @NotNull UUID getId() {
+    @NotNull
+    public UUID getId() {
         return id;
     }
 
     /**
-     * @return название продукта.
+     * @return название продукта
      */
     @NotNull
     public String getTitle() {
@@ -62,7 +63,7 @@ public abstract class Product implements Searchable {
     }
 
     /**
-     * @return true, если продукт специальный.
+     * @return true, если продукт специальный
      */
     public boolean isSpecial() {
         return false;
@@ -78,13 +79,15 @@ public abstract class Product implements Searchable {
     }
 
     @Override
-    public @NotNull String getSearchableTerm() {
+    @NotNull
+    public String getSearchableTerm() {
         return toString();
     }
 
     @JsonIgnore
     @Override
-    public @NotNull String getSearchableContentKind() {
+    @NotNull
+    public String getSearchableContentKind() {
         return SEARCHABLE_CONTENT_KIND;
     }
 

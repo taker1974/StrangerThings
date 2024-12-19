@@ -1,6 +1,6 @@
 // SkyPro
 // Терских Константин, kostus.online.1974@yandex.ru, 2024
-// Домашнее задание по теме "Введение в веб-программирование с Spring Boot"
+// Домашнее задание по теме "Жизненный цикл компонентов Spring Boot приложения"
 
 package org.skypro.skyshop.service;
 
@@ -34,8 +34,9 @@ public class SearchService {
      * Количество результатов поиска.
      */
     public static final int MAX_RESULTS = 10_000;
+
     @NotNull
-    private final StorageService storage;
+    private final StorageService storageService;
 
     /**
      * Конструктор.
@@ -43,9 +44,7 @@ public class SearchService {
      * @param storageService экземпляр StorageService
      */
     public SearchService(@NotNull StorageService storageService) {
-        // почему здесь не получается использовать this?
-        /*this.*/
-        storage = storageService;
+        this.storageService = storageService;
     }
 
     /**
@@ -63,7 +62,7 @@ public class SearchService {
         // На этом потерял много времени, пока не начал пошаговую отладку запроса поиска
         // и не увидел, что ошибка в .collect внутри storage.
 
-        return storage.getSearchableItems().stream()
+        return storageService.getSearchableItems().stream()
                 .filter(searchable -> searchable.getSearchableTerm().contains(pattern))
                 .distinct()
                 .limit(MAX_RESULTS)

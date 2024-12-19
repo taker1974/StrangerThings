@@ -1,6 +1,6 @@
 // SkyPro
 // Терских Константин, kostus.online.1974@yandex.ru, 2024
-// Домашнее задание по теме "Введение в веб-программирование с Spring Boot"
+// Домашнее задание по теме "Жизненный цикл компонентов Spring Boot приложения"
 
 package org.skypro.skyshop.controller;
 
@@ -24,7 +24,6 @@ import java.util.UUID;
  * @author Константин Терских, kostus.online.1974@yandex.ru, 2024
  * @version 1.1
  */
-@SuppressWarnings("unused")
 @RestController
 public class ShopController {
     private final StorageService storageService;
@@ -39,18 +38,13 @@ public class ShopController {
         this.basketService = basketService;
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "test";
-    }
-
     @GetMapping("/products")
-    public Collection<Product> getAllProducts() {
+    public Collection<Product> getProductsAll() {
         return storageService.getProductsAll().values();
     }
 
     @GetMapping("/articles")
-    public Collection<Article> getAllArticles() {
+    public Collection<Article> getArticlesAll() {
         return storageService.getArticlesAll().values();
     }
 

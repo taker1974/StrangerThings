@@ -1,6 +1,6 @@
 // SkyPro
 // Терских Константин, kostus.online.1974@yandex.ru, 2024
-// Домашнее задание по теме "ООП. Наследование. Абстрактные классы"
+// Домашнее задание по теме "Жизненный цикл компонентов Spring Boot приложения"
 
 package org.skypro.skyshop.model.product;
 
@@ -18,7 +18,7 @@ public final class FixPriceProduct extends Product {
     /**
      * Конструктор.
      *
-     * @param title название продукта.
+     * @param title название продукта
      */
     public FixPriceProduct(@NotNull String title) {
         super(title);

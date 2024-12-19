@@ -1,6 +1,6 @@
 // SkyPro
 // Терских Константин, kostus.online.1974@yandex.ru, 2024
-// Домашнее задание по теме "Введение в веб-программирование с Spring Boot"
+// Домашнее задание по теме "Жизненный цикл компонентов Spring Boot приложения"
 
 package org.skypro.skyshop.service;
 
@@ -33,12 +33,12 @@ public final class StorageService {
     /**
      * Начальная вместимость хранилища ассортимента товаров.
      */
-    public final int INITIAL_CAPACITY_PRODUCTS = 100;
+    public static final int INITIAL_CAPACITY_PRODUCTS = 100;
 
     /**
      * Начальная вместимость хранилища статей.
      */
-    public final int INITIAL_CAPACITY_ARTICLES = 100;
+    public static final int INITIAL_CAPACITY_ARTICLES = 100;
 
     @NotNull
     private final Map<UUID, Product> products;
@@ -50,21 +50,9 @@ public final class StorageService {
      * Конструктор.
      */
     public StorageService() {
-        products = new HashMap<>(INITIAL_CAPACITY_PRODUCTS);
-        articles = new HashMap<>(INITIAL_CAPACITY_ARTICLES);
-        InitializeWithSamples();
-    }
-
-    /**
-     * Фабричный метод.
-     *
-     * @return сервис хранения.
-     */
-    @SuppressWarnings("unused")
-    public static StorageService CreateWithSamples() {
-        var storage = new StorageService();
-        storage.InitializeWithSamples();
-        return storage;
+        products = HashMap.newHashMap(INITIAL_CAPACITY_PRODUCTS);
+        articles = HashMap.newHashMap(INITIAL_CAPACITY_ARTICLES);
+        initializeWithSamples();
     }
 
     /**
@@ -84,17 +72,6 @@ public final class StorageService {
     @NotNull
     public Optional<Product> getProductById(@NotNull UUID id) {
         return Optional.ofNullable(products.get(id));
-    }
-
-    /**
-     * Отладочный метод получения товара.
-     *
-     * @return первый товар или пустой
-     */
-    @SuppressWarnings("unused")
-    @NotNull
-    public Optional<Product> getFirstProduct() {
-        return Optional.ofNullable(products.get(products.keySet().iterator().next()));
     }
 
     /**
@@ -127,7 +104,7 @@ public final class StorageService {
     /**
      * Инициализация для демонстрации работы сервиса.
      */
-    public void InitializeWithSamples() {
+    public void initializeWithSamples() {
         Product product1 = new SimpleProduct("Молоко", 80);
         Product product2 = new FixPriceProduct("Хлеб");
         Product product3 = new FixPriceProduct("Сыр");

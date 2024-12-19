@@ -1,6 +1,6 @@
 // SkyPro
 // Терских Константин, kostus.online.1974@yandex.ru, 2024
-// Домашнее задание по теме "Введение в веб-программирование с Spring Boot"
+// Домашнее задание по теме "Жизненный цикл компонентов Spring Boot приложения"
 
 package org.skypro.skyshop.model.search;
 
@@ -12,12 +12,12 @@ public interface Searchable {
     /**
      * @return Идентификатор
      */
+    @NotNull
     UUID getId();
 
     /**
      * @return Имя объекта Searchable
      */
-    @SuppressWarnings("unused")
     @NotNull
     default String getSearchableName() {
         return this.getClass().getSimpleName() + "-" + this.hashCode();
@@ -32,7 +32,6 @@ public interface Searchable {
     /**
      * @return Вид содержимого, по которому производится поиск
      */
-    @SuppressWarnings("unused")
     @NotNull
     String getSearchableContentKind();
 }

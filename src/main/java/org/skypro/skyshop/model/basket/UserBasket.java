@@ -4,6 +4,8 @@
 
 package org.skypro.skyshop.model.basket;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collection;
 import java.util.Collections;
 
@@ -35,6 +37,7 @@ public final class UserBasket {
     /**
      * @return список из BasketItem
      */
+    @NotNull
     public Collection<BasketItem> getBasketItems() {
         return Collections.unmodifiableCollection(basketItems);
     }

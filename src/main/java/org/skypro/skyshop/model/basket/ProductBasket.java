@@ -65,6 +65,7 @@ public class ProductBasket {
     /**
      * @return массив товаров Map<UUID, Integer>, обёрнутый в Collections.unmodifiableMap
      */
+    @NotNull
     public Map<UUID, Integer> getProductsAll() {
         return Collections.unmodifiableMap(basket);
     }

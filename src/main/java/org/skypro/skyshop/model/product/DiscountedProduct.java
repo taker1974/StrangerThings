@@ -1,6 +1,6 @@
 // SkyPro
 // Терских Константин, kostus.online.1974@yandex.ru, 2024
-// Домашнее задание по теме "Исключения в Java"
+// Домашнее задание по теме "Жизненный цикл компонентов Spring Boot приложения"
 
 package org.skypro.skyshop.model.product;
 
@@ -20,7 +20,7 @@ public final class DiscountedProduct extends Product {
      * Конструктор.
      *
      * @param title     название продукта.
-     * @param basePrice базовая цена продукта.
+     * @param basePrice базовая цена продукта
      * @param discount  скидка, 0..100%
      */
     public DiscountedProduct(@NotNull String title, int basePrice, int discount) {
