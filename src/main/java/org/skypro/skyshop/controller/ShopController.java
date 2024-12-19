@@ -4,6 +4,7 @@
 
 package org.skypro.skyshop.controller;
 
+import org.jetbrains.annotations.NotNull;
 import org.skypro.skyshop.model.article.Article;
 import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.search.SearchResult;
@@ -31,16 +32,19 @@ public class ShopController {
     }
 
     @GetMapping("/products")
+    @NotNull
     public Collection<Product> getProductsAll() {
         return storageService.getProducts().values();
     }
 
     @GetMapping("/articles")
+    @NotNull
     public Collection<Article> getArticlesAll() {
         return storageService.getArticles().values();
     }
 
     @GetMapping("/search")
+    @NotNull
     public Collection<SearchResult> getSearchResultsAll(String pattern) {
         return searchService.search(pattern);
     }

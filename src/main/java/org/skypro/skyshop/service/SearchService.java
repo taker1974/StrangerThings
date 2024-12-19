@@ -30,7 +30,7 @@ public final class SearchService {
     public static final int MAX_RESULTS = 10_000;
 
     @NotNull
-    private final StorageService storage;
+    private final StorageService storageService;
 
     /**
      * Конструктор.
@@ -38,9 +38,7 @@ public final class SearchService {
      * @param storageService экземпляр StorageService
      */
     public SearchService(@NotNull StorageService storageService) {
-        // почему здесь не получается использовать this?
-        /*this.*/
-        storage = storageService;
+        this.storageService = storageService;
     }
 
     @NotNull
@@ -52,7 +50,7 @@ public final class SearchService {
         // На этом потерял много времени, пока не начал пошаговую отладку запроса поиска
         // и не увидел, что ошибка в .collect внутри storage.
 
-        return storage.getSearchableItems().stream()
+        return storageService.getSearchableItems().stream()
                 .filter(searchable -> searchable.getSearchableTerm().contains(pattern))
                 .distinct()
                 .limit(MAX_RESULTS)
