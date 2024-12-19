@@ -1,6 +1,6 @@
 // SkyPro
 // Терских Константин, kostus.online.1974@yandex.ru, 2024
-// Домашнее задание по теме "Введение в веб-программирование с Spring Boot"
+// Домашнее задание по теме "Жизненный цикл компонентов Spring Boot приложения"
 
 package org.skypro.skyshop.model.product;
 
@@ -70,6 +70,7 @@ public abstract class Product implements Searchable {
     }
 
     @JsonIgnore
+    @Override
     @NotNull
     @Override
     public String getSearchableName() {

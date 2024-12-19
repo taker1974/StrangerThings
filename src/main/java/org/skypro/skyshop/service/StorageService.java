@@ -1,6 +1,6 @@
 // SkyPro
 // Терских Константин, kostus.online.1974@yandex.ru, 2024
-// Домашнее задание по теме "Введение в веб-программирование с Spring Boot"
+// Домашнее задание по теме "Жизненный цикл компонентов Spring Boot приложения"
 
 package org.skypro.skyshop.service;
 
@@ -11,11 +11,15 @@ import org.skypro.skyshop.model.product.FixPriceProduct;
 import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.product.SimpleProduct;
 import org.skypro.skyshop.model.search.Searchable;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+// https://www.baeldung.com/spring-bean-scopes
 
 /**
  * Сервис хранения.
@@ -23,7 +27,8 @@ import java.util.stream.Stream;
  * @author Константин Терских, kostus.online.1974@yandex.ru, 2024
  * @version 1.1
  */
-@Service
+@Repository
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public final class StorageService {
     /**
      * Начальная вместимость хранилища ассортимента товаров.
@@ -54,16 +59,27 @@ public final class StorageService {
      * @return коллекцию всего ассортимента продуктов
      */
     @NotNull
-    public Map<UUID, Product> getProducts() {
-        return products;
+    public Map<UUID, Product> getProductsAll() {
+        return Collections.unmodifiableMap(products);
+    }
+
+    /**
+     * Получение товара по идентификатору.
+     *
+     * @param id идентификатор
+     * @return товар или пустой
+     */
+    @NotNull
+    public Optional<Product> getProductById(@NotNull UUID id) {
+        return Optional.ofNullable(products.get(id));
     }
 
     /**
      * @return коллекцию всех статей
      */
     @NotNull
-    public Map<UUID, Article> getArticles() {
-        return articles;
+    public Map<UUID, Article> getArticlesAll() {
+        return Collections.unmodifiableMap(articles);
     }
 
     /**

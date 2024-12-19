@@ -1,13 +1,17 @@
 // SkyPro
 // Терских Константин, kostus.online.1974@yandex.ru, 2024
-// Домашнее задание по теме "Введение в веб-программирование с Spring Boot"
+// Домашнее задание по теме "Жизненный цикл компонентов Spring Boot приложения"
 
 package org.skypro.skyshop.service;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.skypro.skyshop.model.search.SearchResult;
 import org.skypro.skyshop.model.search.Searchable;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -16,6 +20,8 @@ import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+// https://www.baeldung.com/spring-bean-scopes
+
 /**
  * Сервис поиска.
  *
@@ -23,7 +29,8 @@ import java.util.stream.Collectors;
  * @version 1.1
  */
 @Service
-public final class SearchService {
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class SearchService {
     /**
      * Количество результатов поиска.
      */
@@ -41,8 +48,21 @@ public final class SearchService {
         this.storageService = storageService;
     }
 
+    /**
+     * Поиск по шаблону.
+     *
+     * @param pattern шаблон поиска
+     * @return коллекция результатов поиска
+     */
     @NotNull
-    public Collection<SearchResult> search(@NotNull String pattern) {
+    public Collection<SearchResult> search(@Nullable String pattern) {
+        if (Objects.isNull(pattern)) {
+            return new TreeSet<>(new SearchResultComparator());
+        }
+        if (pattern.isEmpty()) {
+            return new TreeSet<>(new SearchResultComparator());
+        }
+
         Function<Searchable, SearchResult> toResult = SearchResult::fromSearchable;
 
         // Была ошибка в storage.getSearchableItems: я пытался возвращать

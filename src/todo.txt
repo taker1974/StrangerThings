@@ -1,0 +1,20 @@
+✓   Шаг 1. Добавление компонента корзины
+    ✓   model.basket.ProductBasket:
+        ✓   addProduct()
+        ✓   getProductsAll()
+
+    Шаг 2. Сервис работы с корзиной
+        service.StorageService:
+        ✓   getProductById()
+
+        service.BasketService
+        ✓   addProduct()
+            ✓   model.basket.BasketItem
+            ✓   model.basket.UserBasket
+        D   getUserBasket()
+
+    Шаг 3. Методы контроллера
+
+    Шаг 4. Проверка работоспособности
+
+

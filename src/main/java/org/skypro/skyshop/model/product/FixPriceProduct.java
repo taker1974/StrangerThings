@@ -1,6 +1,6 @@
 // SkyPro
 // Терских Константин, kostus.online.1974@yandex.ru, 2024
-// Домашнее задание по теме "ООП. Наследование. Абстрактные классы"
+// Домашнее задание по теме "Жизненный цикл компонентов Spring Boot приложения"
 
 package org.skypro.skyshop.model.product;
 
@@ -13,12 +13,12 @@ import org.jetbrains.annotations.NotNull;
  * @version 1.1
  */
 public final class FixPriceProduct extends Product {
-    private final static int FIXED_PRICE = 100;
+    public static final int CURRENT_FIXED_PRICE = 100;
 
     /**
      * Конструктор.
      *
-     * @param title название продукта.
+     * @param title название продукта
      */
     public FixPriceProduct(@NotNull String title) {
         super(title);
@@ -26,12 +26,12 @@ public final class FixPriceProduct extends Product {
 
     @Override
     public int getPrice() {
-        return FIXED_PRICE;
+        return CURRENT_FIXED_PRICE;
     }
 
     @Override
     public String toString() {
-        return getTitle() + ": Фиксированная цена " + FIXED_PRICE;
+        return getTitle() + ": Фиксированная цена " + CURRENT_FIXED_PRICE;
     }
 
     @Override
