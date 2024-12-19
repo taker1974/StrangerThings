@@ -32,6 +32,7 @@ public final class SearchResult {
      * @param searchable экземпляр Searchable
      * @return экземпляр SearchResult
      */
+    @NotNull
     public static SearchResult fromSearchable(@NotNull Searchable searchable) {
         return new SearchResult(searchable.getSearchableName());
     }
