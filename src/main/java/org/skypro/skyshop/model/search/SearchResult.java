@@ -15,15 +15,25 @@ import org.jetbrains.annotations.NotNull;
 public final class SearchResult {
 
     @NotNull
+    private final String id;
+
+    @NotNull
     private final String name;
+
+    @NotNull
+    private final String contentType;
 
     /**
      * Конструктор.
      *
-     * @param name имя
+     * @param id          ID
+     * @param name        имя
+     * @param contentType тип
      */
-    public SearchResult(@NotNull String name) {
+    public SearchResult(@NotNull String id, @NotNull String name, @NotNull String contentType) {
+        this.id = id;
         this.name = name;
+        this.contentType = contentType;
     }
 
     /**
@@ -32,16 +42,33 @@ public final class SearchResult {
      * @param searchable экземпляр Searchable
      * @return экземпляр SearchResult
      */
-    @NotNull
     public static SearchResult fromSearchable(@NotNull Searchable searchable) {
-        return new SearchResult(searchable.getSearchableName());
+        return new SearchResult(searchable.getId().toString(),
+                searchable.getSearchableName(),
+                searchable.getSearchableContentKind());
     }
 
     /**
-     * @return Имя результата поиска
+     * @return ID результата поиска
+     */
+    @NotNull
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @return имя результата поиска
      */
     @NotNull
     public String getName() {
         return name;
+    }
+
+    /**
+     * @return тип содержимого поиска
+     */
+    @NotNull
+    public String getContentType() {
+        return contentType;
     }
 }
