@@ -35,13 +35,13 @@ public class ShopController {
     @SuppressWarnings("unused")
     @GetMapping("/products")
     public Collection<Product> getAllProducts() {
-        return storageService.getProducts().values();
+        return storageService.getProductsAll().values();
     }
 
     @SuppressWarnings("unused")
     @GetMapping("/articles")
     public Collection<Article> getAllArticles() {
-        return storageService.getArticles().values();
+        return storageService.getArticlesAll().values();
     }
 
     @SuppressWarnings("unused")

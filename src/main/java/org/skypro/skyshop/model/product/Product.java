@@ -72,7 +72,6 @@ public abstract class Product implements Searchable {
     @JsonIgnore
     @Override
     @NotNull
-    @Override
     public String getSearchableName() {
         return this.getClass().getSimpleName() + "-" +
                 SEARCHABLE_CONTENT_KIND + "-" +

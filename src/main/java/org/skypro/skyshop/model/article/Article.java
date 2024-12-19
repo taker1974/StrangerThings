@@ -70,7 +70,6 @@ public final class Article implements Searchable {
         return title + "\n" + content;
     }
 
-    @Override
     @JsonIgnore
     @Override
     @NotNull
