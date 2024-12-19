@@ -13,8 +13,14 @@ import org.jetbrains.annotations.NotNull;
  * @version 1.1
  */
 public final class SearchResult {
+
+    @NotNull
     private final String id;
+
+    @NotNull
     private final String name;
+
+    @NotNull
     private final String contentType;
 
     /**
@@ -45,6 +51,7 @@ public final class SearchResult {
     /**
      * @return ID результата поиска
      */
+    @NotNull
     public String getId() {
         return id;
     }
@@ -52,6 +59,7 @@ public final class SearchResult {
     /**
      * @return имя результата поиска
      */
+    @NotNull
     public String getName() {
         return name;
     }
@@ -59,6 +67,7 @@ public final class SearchResult {
     /**
      * @return тип содержимого поиска
      */
+    @NotNull
     public String getContentType() {
         return contentType;
     }

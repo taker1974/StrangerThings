@@ -28,58 +28,49 @@ public final class StorageService {
     /**
      * Начальная вместимость хранилища ассортимента товаров.
      */
-    public final int INITIAL_CAPACITY_PRODUCTS = 100;
+    public static final int INITIAL_CAPACITY_PRODUCTS = 100;
 
     /**
      * Начальная вместимость хранилища статей.
      */
-    public final int INITIAL_CAPACITY_ARTICLES = 100;
+    public static final int INITIAL_CAPACITY_ARTICLES = 100;
 
-    private @NotNull
-    final Map<UUID, Product> products;
+    @NotNull
+    private final Map<UUID, Product> products;
 
-    private @NotNull
-    final Map<UUID, Article> articles;
+    @NotNull
+    private final Map<UUID, Article> articles;
 
     /**
      * Конструктор.
      */
     public StorageService() {
-        products = new HashMap<>(INITIAL_CAPACITY_PRODUCTS);
-        articles = new HashMap<>(INITIAL_CAPACITY_ARTICLES);
-        InitializeWithSamples();
-    }
-
-    /**
-     * Фабричный метод.
-     *
-     * @return сервис хранения.
-     */
-    @SuppressWarnings("unused")
-    public static StorageService CreateWithSamples() {
-        var storage = new StorageService();
-        storage.InitializeWithSamples();
-        return storage;
+        products = HashMap.newHashMap(INITIAL_CAPACITY_PRODUCTS);
+        articles = HashMap.newHashMap(INITIAL_CAPACITY_ARTICLES);
+        initializeWithSamples();
     }
 
     /**
      * @return коллекцию всего ассортимента продуктов
      */
-    public @NotNull Map<UUID, Product> getProducts() {
+    @NotNull
+    public Map<UUID, Product> getProducts() {
         return products;
     }
 
     /**
      * @return коллекцию всех статей
      */
-    public @NotNull Map<UUID, Article> getArticles() {
+    @NotNull
+    public Map<UUID, Article> getArticles() {
         return articles;
     }
 
     /**
      * @return коллекцию всех товаров и статей
      */
-    public @NotNull Collection<Searchable> getSearchableItems() {
+    @NotNull
+    public Collection<Searchable> getSearchableItems() {
         var collection = Stream.of(products.values(), articles.values());
         return collection
                 .flatMap(Collection::stream)
@@ -97,7 +88,7 @@ public final class StorageService {
     /**
      * Инициализация для демонстрации работы сервиса.
      */
-    public void InitializeWithSamples() {
+    public void initializeWithSamples() {
         Product product1 = new SimpleProduct("Молоко", 80);
         Product product2 = new FixPriceProduct("Хлеб");
         Product product3 = new FixPriceProduct("Сыр");

@@ -19,7 +19,10 @@ import java.util.UUID;
  */
 public abstract class Product implements Searchable {
     public static final String SEARCHABLE_CONTENT_KIND = "PRODUCT";
+
+    @NotNull
     private final UUID id;
+
     @NotNull
     private final String title;
 
@@ -28,7 +31,7 @@ public abstract class Product implements Searchable {
      *
      * @param title название продукта
      */
-    public Product(@NotNull String title) {
+    protected Product(@NotNull String title) {
         if (title.isBlank()) {
             throw new IllegalArgumentException("Наименование продукта не может быть пустым");
         }
@@ -36,6 +39,7 @@ public abstract class Product implements Searchable {
         this.title = title;
     }
 
+    @NotNull
     public UUID getId() {
         return id;
     }
@@ -67,6 +71,7 @@ public abstract class Product implements Searchable {
 
     @JsonIgnore
     @NotNull
+    @Override
     public String getSearchableName() {
         return this.getClass().getSimpleName() + "-" +
                 SEARCHABLE_CONTENT_KIND + "-" +
@@ -75,13 +80,15 @@ public abstract class Product implements Searchable {
     }
 
     @Override
-    public @NotNull String getSearchableTerm() {
+    @NotNull
+    public String getSearchableTerm() {
         return toString();
     }
 
     @JsonIgnore
     @Override
-    public @NotNull String getSearchableContentKind() {
+    @NotNull
+    public String getSearchableContentKind() {
         return SEARCHABLE_CONTENT_KIND;
     }
 
